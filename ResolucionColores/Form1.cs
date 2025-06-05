@@ -1,297 +1,141 @@
-namespace ResolucionColores
+namespace Colorama
 {
     public partial class Form1 : Form
     {
-        int playerChoice=0;
-        CheckBox[] randomizados;
         public Form1()
         {
             InitializeComponent();
         }
 
+        Random rng = new Random();
+        List<Button> botones = new List<Button>();
+
+        Button? botonSeleccionado1 = null;
+        Button? botonSeleccionado2 = null;
+        Color colorObjetivo;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            ColorObjetivo.BackColor = Color.FromArgb(199, 233, 122);
-            ColorObjetivo.Text = ColorObjetivo.BackColor.ToString();
-            checkBox1.BackColor = RandomColor(ColorObjetivo.BackColor.R, ColorObjetivo.BackColor.G, ColorObjetivo.BackColor.B);
-
-            checkBox2.BackColor = RandomColor(ColorObjetivo.BackColor.R, ColorObjetivo.BackColor.G, ColorObjetivo.BackColor.B);
-            checkBox3.BackColor = RandomColor(ColorObjetivo.BackColor.R, ColorObjetivo.BackColor.G, ColorObjetivo.BackColor.B);
-            checkBox4.BackColor = RandomColor(ColorObjetivo.BackColor.R, ColorObjetivo.BackColor.G, ColorObjetivo.BackColor.B);
-            checkBox5.BackColor = RandomColor(ColorObjetivo.BackColor.R, ColorObjetivo.BackColor.G, ColorObjetivo.BackColor.B);
-            randomizados = new CheckBox[] { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5 };
-            foreach (CheckBox checkBox in randomizados)
+            // Instanciamos los botones y los agregamos a la lista.
+            for (int i = 1; i <= 8; i++)
             {
-                checkBox.Text = checkBox.BackColor.ToString();
+                Button? boton = this.Controls["button" + i.ToString()] as Button;
+                if (boton != null)
+                    botones.Add(boton);
+                if (boton != null)
+                {
+                    boton.Click += Boton_Click;
+                }   
             }
 
-            Random rand2 = new Random();
-            int indice = rand2.Next(0, randomizados.Length);
+            // Creamos un color objetivo.
+            button9.BackColor = Color.FromArgb(
+                rng.Next(256), 
+                rng.Next(256), 
+                rng.Next(256)
+            );
+            button9.Size = new Size(270, 50);
+            button9.Text = "COLOR OBJETIVO";
+            button9.ForeColor = Color.White;
 
-            this.Text = randomizados[indice].Text;
-            int SR = ColorObjetivo.BackColor.R - randomizados[indice].BackColor.R;
-            int SG = ColorObjetivo.BackColor.G - randomizados[indice].BackColor.G;
-            int SB = ColorObjetivo.BackColor.B - randomizados[indice].BackColor.B;
-            Color Solucion = Color.FromArgb(SR, SG, SB);
-            checkBox6.BackColor = Solucion;
-            checkBox6.Text = Solucion.ToString();
-        }
-        public Color RandomColor(int r, int g, int b)
-        {
-            Random rand = new Random();
+            colorObjetivo = button9.BackColor;
 
-            int newR = rand.Next(0, r);
-            int newG = rand.Next(0, g);
-            int newB = rand.Next(0, b);
-            Color col = Color.FromArgb(newR, newG, newB);
-            return col;
-        }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (playerChoice != 0 & checkBox1.Checked)
+
+            // Asignamos un color aleatorio a cada botón.
+            foreach (Button boton in botones)
             {
-                int r;
-                int g;
-                int b;
-                if (playerChoice == 6)
-                {
-                    r = checkBox1.BackColor.R + checkBox6.BackColor.R;
-                    g = checkBox1.BackColor.G + checkBox6.BackColor.G;
-                    b = checkBox1.BackColor.B + checkBox6.BackColor.B;
-                }
-                else
-                {
-                    r = checkBox1.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
-                    g = checkBox1.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
-                    b = checkBox1.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
-                }
-                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
+                boton.BackColor = Color.FromArgb(
+                    rng.Next(0, colorObjetivo.R), 
+                    rng.Next(0, colorObjetivo.G), 
+                    rng.Next(0, colorObjetivo.B)
+                );
+                boton.Size = new Size(50, 50);
+                boton.Text = "";
+                
             }
 
-            if (checkBox1.Checked) {
-                playerChoice = 1;
-            }
-            else
-            {
-                playerChoice = 0;
-            }
+
+            // Seleccionmos un color aleatoriamente entre las variaciones y calculamos su sumplementario.
+            var colorASumplementar = botones[rng.Next(botones.Count)].BackColor;
             
+            var colorSuplementario = Color.FromArgb(
+                colorObjetivo.R-colorASumplementar.R,
+                colorObjetivo.G- colorASumplementar.G,
+                colorObjetivo.B- colorASumplementar.B
+            );
+
+            button8.BackColor = colorSuplementario;
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+
+        private void Boton_Click(object? sender, EventArgs e)
         {
-            if (playerChoice != 0 & checkBox2.Checked)
+            if (sender is Button boton)
             {
-                int r;
-                int g;
-                int b;
-                if (playerChoice == 6)
+                if (botonSeleccionado1 == null)
                 {
-                    r = checkBox2.BackColor.R + checkBox6.BackColor.R;
-                    g = checkBox2.BackColor.G + checkBox6.BackColor.G;
-                    b = checkBox2.BackColor.B + checkBox6.BackColor.B;
+                    botonSeleccionado1 = boton;
+                    boton.FlatStyle = FlatStyle.Flat;
+                    boton.FlatAppearance.BorderColor = Color.Yellow;
+                    boton.FlatAppearance.BorderSize = 3;
                 }
-                else
+                else if (botonSeleccionado2 == null && boton != botonSeleccionado1)
                 {
-                    r = checkBox2.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
-                    g = checkBox2.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
-                    b = checkBox2.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
-                }
-                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
-            }
+                    botonSeleccionado2 = boton;
+                    boton.FlatStyle = FlatStyle.Flat;
+                    boton.FlatAppearance.BorderColor = Color.Yellow;
+                    boton.FlatAppearance.BorderSize = 3;
 
-            if (checkBox2.Checked)
-            {
-                playerChoice = 2;
-            }
-            else playerChoice = 0;
-            
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (playerChoice != 0 & checkBox3.Checked)
-            {
-                int r;
-                int g;
-                int b;
-                if (playerChoice == 6)
-                {
-                    r = checkBox3.BackColor.R + checkBox6.BackColor.R;
-                    g = checkBox3.BackColor.G + checkBox6.BackColor.G;
-                    b = checkBox3.BackColor.B + checkBox6.BackColor.B;
+                    // Con los dos seleccionados, comprobamos la suma.
+                    ComprobarSuma();
                 }
                 else
                 {
-                    r = checkBox3.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
-                    g = checkBox3.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
-                    b = checkBox3.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
+                    // Reiniciar selección si ya hay dos seleccionados
+                    Reiniciar();
+                    botonSeleccionado1 = boton;
+                    boton.FlatStyle = FlatStyle.Flat;
+                    boton.FlatAppearance.BorderColor = Color.Yellow;
+                    boton.FlatAppearance.BorderSize = 3;
                 }
-                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
-            }
-
-            if (checkBox3.Checked)
-            {
-                playerChoice = 3;
-            }
-            else
-            {
-                playerChoice = 0;
             }
         }
 
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        private void ComprobarSuma()
         {
-            if (playerChoice != 0 & checkBox4.Checked)
+            if (botonSeleccionado1 != null && botonSeleccionado2 != null)
             {
-                int r;
-                int g;
-                int b;
-                if (playerChoice == 6)
-                {
-                    r = checkBox4.BackColor.R + checkBox6.BackColor.R;
-                    g = checkBox4.BackColor.G + checkBox6.BackColor.G;
-                    b = checkBox4.BackColor.B + checkBox6.BackColor.B;
-                }
-                else
-                {
-                    r = checkBox4.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
-                    g = checkBox4.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
-                    b = checkBox4.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
-                }
-                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
-            }
+                int red = botonSeleccionado1.BackColor.R + botonSeleccionado2.BackColor.R;
+                int green = botonSeleccionado1.BackColor.G + botonSeleccionado2.BackColor.G;
+                int blue = botonSeleccionado1.BackColor.B + botonSeleccionado2.BackColor.B;
 
-            if (checkBox4.Checked)
-            {
-                playerChoice = 4;
-            }
-            else
-            {
-                playerChoice = 0;
+                // Comprobamos si la suma de los colores es igual al color objetivo.
+                if (red == colorObjetivo.R && green == colorObjetivo.G && blue == colorObjetivo.B)
+                {
+                    MessageBox.Show("¡Correcto!");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrecto");
+                }
+
+                Reiniciar();
             }
         }
 
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        private void Reiniciar()
         {
-            if (playerChoice!=0&checkBox5.Checked)
+            if (botonSeleccionado1 != null)
             {
-                int r;
-                int g;
-                int b;
-                if (playerChoice==6)
-                {
-                    r = checkBox5.BackColor.R +checkBox6.BackColor.R;
-                    g = checkBox5.BackColor.G + checkBox6.BackColor.G;
-                    b = checkBox5.BackColor.B + checkBox6.BackColor.B;
-                }
-                else
-                {
-                    r = checkBox5.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
-                    g = checkBox5.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
-                    b = checkBox5.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
-                }
-                    
-                if (r==ColorObjetivo.BackColor.R&g==ColorObjetivo.BackColor.G&b==ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
+                botonSeleccionado1.FlatAppearance.BorderSize = 0;
             }
-
-            if (checkBox5.Checked)
+            if (botonSeleccionado2 != null)
             {
-                playerChoice = 5;
+                botonSeleccionado2.FlatAppearance.BorderSize = 0;
             }
-            else
-            {
-                playerChoice = 0;
-            }
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (playerChoice != 0 & checkBox6.Checked)
-            {
-                int r = checkBox6.BackColor.R + randomizados[playerChoice-1].BackColor.R;
-                int g = checkBox6.BackColor.G + randomizados[playerChoice-1].BackColor.G;
-                int b = checkBox6.BackColor.B + randomizados[playerChoice-1].BackColor.B;
-                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
-                {
-                    MessageBox.Show("congratz!!");
-                }
-                else
-                {
-                    
-                    foreach (CheckBox box in randomizados)
-                    {
-                        box.Checked = false;
-                    }
-                    checkBox6.Checked = false;
-                }
-            }
-
-            if (checkBox6.Checked)
-            {
-                playerChoice = 6;
-            }
-            else
-            {
-                playerChoice = 0;
-            }
+            botonSeleccionado1 = null;
+            botonSeleccionado2 = null;
         }
     }
-
 }

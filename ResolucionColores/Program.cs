@@ -1,4 +1,4 @@
-namespace ResolucionColores
+namespace Colorama
 {
     internal static class Program
     {
