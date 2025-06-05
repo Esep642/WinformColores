@@ -14,4 +14,4 @@ namespace ResolucionColores
             Application.Run(new Form1());
         }
     }
-}
+}//firma
