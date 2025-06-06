@@ -78,7 +78,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
@@ -124,7 +124,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
@@ -167,7 +167,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
@@ -212,7 +212,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
@@ -258,7 +258,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
@@ -292,7 +292,7 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
-                    new SoundPlayer("Murloc.wav").Play();
+                    new SoundPlayer("laser_1.wav").Play();
 
                 }
             }
