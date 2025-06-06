@@ -1,14 +1,15 @@
+using System.Media;
+
 namespace ResolucionColores
 {
     public partial class Form1 : Form
     {
-        int playerChoice=0;
+        int playerChoice = 0;
         CheckBox[] randomizados;
         public Form1()
         {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             ColorObjetivo.BackColor = Color.FromArgb(199, 233, 122);
@@ -77,17 +78,20 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
-            if (checkBox1.Checked) {
+            if (checkBox1.Checked)
+            {
                 playerChoice = 1;
             }
             else
             {
                 playerChoice = 0;
             }
-            
+
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -120,6 +124,8 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
@@ -128,7 +134,7 @@ namespace ResolucionColores
                 playerChoice = 2;
             }
             else playerChoice = 0;
-            
+
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -161,6 +167,8 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
@@ -204,6 +212,8 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
@@ -219,14 +229,14 @@ namespace ResolucionColores
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (playerChoice!=0&checkBox5.Checked)
+            if (playerChoice != 0 & checkBox5.Checked)
             {
                 int r;
                 int g;
                 int b;
-                if (playerChoice==6)
+                if (playerChoice == 6)
                 {
-                    r = checkBox5.BackColor.R +checkBox6.BackColor.R;
+                    r = checkBox5.BackColor.R + checkBox6.BackColor.R;
                     g = checkBox5.BackColor.G + checkBox6.BackColor.G;
                     b = checkBox5.BackColor.B + checkBox6.BackColor.B;
                 }
@@ -236,8 +246,8 @@ namespace ResolucionColores
                     g = checkBox5.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
                     b = checkBox5.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
                 }
-                    
-                if (r==ColorObjetivo.BackColor.R&g==ColorObjetivo.BackColor.G&b==ColorObjetivo.BackColor.B)
+
+                if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
                 {
                     MessageBox.Show("congratz!!");
                 }
@@ -248,6 +258,8 @@ namespace ResolucionColores
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
@@ -265,21 +277,23 @@ namespace ResolucionColores
         {
             if (playerChoice != 0 & checkBox6.Checked)
             {
-                int r = checkBox6.BackColor.R + randomizados[playerChoice-1].BackColor.R;
-                int g = checkBox6.BackColor.G + randomizados[playerChoice-1].BackColor.G;
-                int b = checkBox6.BackColor.B + randomizados[playerChoice-1].BackColor.B;
+                int r = checkBox6.BackColor.R + randomizados[playerChoice - 1].BackColor.R;
+                int g = checkBox6.BackColor.G + randomizados[playerChoice - 1].BackColor.G;
+                int b = checkBox6.BackColor.B + randomizados[playerChoice - 1].BackColor.B;
                 if (r == ColorObjetivo.BackColor.R & g == ColorObjetivo.BackColor.G & b == ColorObjetivo.BackColor.B)
                 {
                     MessageBox.Show("congratz!!");
                 }
                 else
                 {
-                    
+
                     foreach (CheckBox box in randomizados)
                     {
                         box.Checked = false;
                     }
                     checkBox6.Checked = false;
+                    new SoundPlayer("Murloc.wav").Play();
+
                 }
             }
 
@@ -291,6 +305,10 @@ namespace ResolucionColores
             {
                 playerChoice = 0;
             }
+        }
+        private void ColorObjetivo_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

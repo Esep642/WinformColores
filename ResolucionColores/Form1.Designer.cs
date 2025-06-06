@@ -40,19 +40,22 @@
             // ColorObjetivo
             // 
             ColorObjetivo.AutoSize = true;
-            ColorObjetivo.Location = new Point(109, 46);
+            ColorObjetivo.Location = new Point(302, 86);
+            ColorObjetivo.Margin = new Padding(3, 4, 3, 4);
             ColorObjetivo.Name = "ColorObjetivo";
-            ColorObjetivo.Size = new Size(83, 19);
+            ColorObjetivo.Size = new Size(101, 24);
             ColorObjetivo.TabIndex = 0;
             ColorObjetivo.Text = "checkBox1";
             ColorObjetivo.UseVisualStyleBackColor = true;
+            ColorObjetivo.CheckedChanged += ColorObjetivo_CheckedChanged;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(109, 182);
+            checkBox1.Location = new Point(32, 243);
+            checkBox1.Margin = new Padding(3, 4, 3, 4);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
+            checkBox1.Size = new Size(101, 24);
             checkBox1.TabIndex = 1;
             checkBox1.Text = "checkBox1";
             checkBox1.UseVisualStyleBackColor = true;
@@ -61,9 +64,10 @@
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(359, 182);
+            checkBox2.Location = new Point(302, 243);
+            checkBox2.Margin = new Padding(3, 4, 3, 4);
             checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(83, 19);
+            checkBox2.Size = new Size(101, 24);
             checkBox2.TabIndex = 2;
             checkBox2.Text = "checkBox2";
             checkBox2.UseVisualStyleBackColor = true;
@@ -72,9 +76,10 @@
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(601, 182);
+            checkBox3.Location = new Point(611, 243);
+            checkBox3.Margin = new Padding(3, 4, 3, 4);
             checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(83, 19);
+            checkBox3.Size = new Size(101, 24);
             checkBox3.TabIndex = 3;
             checkBox3.Text = "checkBox3";
             checkBox3.UseVisualStyleBackColor = true;
@@ -83,9 +88,10 @@
             // checkBox4
             // 
             checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(109, 305);
+            checkBox4.Location = new Point(162, 350);
+            checkBox4.Margin = new Padding(3, 4, 3, 4);
             checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(83, 19);
+            checkBox4.Size = new Size(101, 24);
             checkBox4.TabIndex = 4;
             checkBox4.Text = "checkBox4";
             checkBox4.UseVisualStyleBackColor = true;
@@ -94,9 +100,10 @@
             // checkBox5
             // 
             checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(359, 305);
+            checkBox5.Location = new Point(450, 350);
+            checkBox5.Margin = new Padding(3, 4, 3, 4);
             checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(83, 19);
+            checkBox5.Size = new Size(101, 24);
             checkBox5.TabIndex = 5;
             checkBox5.Text = "checkBox5";
             checkBox5.UseVisualStyleBackColor = true;
@@ -105,9 +112,10 @@
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(601, 305);
+            checkBox6.Location = new Point(302, 458);
+            checkBox6.Margin = new Padding(3, 4, 3, 4);
             checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(83, 19);
+            checkBox6.Size = new Size(101, 24);
             checkBox6.TabIndex = 6;
             checkBox6.Text = "checkBox6";
             checkBox6.UseVisualStyleBackColor = true;
@@ -115,9 +123,9 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(checkBox6);
             Controls.Add(checkBox5);
             Controls.Add(checkBox4);
@@ -125,6 +133,7 @@
             Controls.Add(checkBox2);
             Controls.Add(checkBox1);
             Controls.Add(ColorObjetivo);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
